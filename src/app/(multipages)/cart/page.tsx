@@ -15,20 +15,25 @@ async function page() {
   const url = await fetch(
     `http://localhost:3000/api/cart?user_id=${cartCookies}`
   );
-  if (url.status == 500) {
-    alert('sign up to access your cart!')
-  }
+  
   const cartData = await url.json();
   const cart = cartData.data;
+
+  if (url.status == 500 || !cart ) {
+    alert('sign up to access your cart!')
+  }
+  console.log('cart', cart)
   const subtotal = cart.reduce(
     (total: number, item: Cart) =>
       total + item.product_price * item.product_quantity,
     0
   );
-  const quantity = cart.reduce(
-    (quantity:number, item:Cart) => 
-      quantity + item.product_quantity,
-  )
+  // const cartQuantity = cart.reduce(
+  //   (quantity: number, item: Cart) =>
+  //     quantity + item.product_quantity,
+  //   0
+  // );
+ 
   const shipping = 0;
   const total = subtotal + shipping;
 
@@ -52,10 +57,9 @@ async function page() {
       <CartDetails
         cookies={cartCookies}
         cart={cart}
-        quantity={quantity}
+        total={total}
         subtotal={subtotal}
         shipping={shipping}
-        total={total}
       />
     </div>
   );

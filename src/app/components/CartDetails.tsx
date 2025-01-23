@@ -7,14 +7,14 @@ import React, { useState } from "react";
 function CartDetails({
   cookies,
   cart,
-  quantity,
+  // quantity,
   subtotal,
   shipping,
   total,
 }: {
   cookies: string | undefined;
   cart: Cart[];
-  quantity: number;
+  // quantity: number;
   subtotal: number;
   shipping: number;
   total: number;
@@ -24,11 +24,11 @@ function CartDetails({
   const [cartShipping, setShipping] = useState(shipping);
   const [CartTotal, setTotal] = useState(total);
 
-  const [Quantity, setQuantity] = useState(quantity);
+  // const [Quantity, setQuantity] = useState(quantity);
 
-  const handleQuantityChange = (change: number) => {
-    setQuantity((prev) => Math.max(1, prev + change));
-  };
+  // const handleQuantityChange = (change: number) => {
+  //   setQuantity((prev) => Math.max(1, prev + change));
+  // };
 
   const handleDelete = async (product_id: string) => {
     try {
@@ -48,7 +48,7 @@ function CartDetails({
         const cart = cartData.data;
         const subtotal = cart.reduce(
           (total: number, item: Cart) =>
-            total + item.product_price * Quantity,
+            total + item.product_price * item.product_quantity,
           0
         );
         const shipping = 0;
@@ -115,7 +115,7 @@ function CartDetails({
                         ${item.product_price.toFixed(2)}
                       </p>
 
-                      <div className="flex items-center justify-center mt-4 lg:mt-0">
+                      {/* <div className="flex items-center justify-center mt-4 lg:mt-0">
                         <div>
                           <div className="flex items-center space-x-2">
                             <div className="flex items-center border border-gray-500">
@@ -137,11 +137,14 @@ function CartDetails({
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
+                       <p className="text-gray-600 text-center md:text-[18px] text-sm openSans w-full md:w-[80px] mt-4 lg:mt-0">
+                        {item.product_quantity}x
+                      </p>
 
                       <p className="text-gray-800 font-semibold md:text-[18px] text-sm openSans text-center w-full md:w-[80px]  lg:mt-0">
                         $
-                        {(item.product_price * Quantity).toFixed(
+                        {(item.product_price * item.product_quantity).toFixed(
                           2
                         )}
                       </p>

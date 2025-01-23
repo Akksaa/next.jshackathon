@@ -1,4 +1,4 @@
-// pages/order-confirmation.js
+
 "use client"
 import React from "react";
 
@@ -6,7 +6,7 @@ const OrderConfirmation = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">
       <div className="max-w-3xl w-full bg-white shadow-md rounded-lg p-6">
-        {/* Confirmation Header */}
+
         <h2 className="text-2xl font-semibold text-green-600 text-center mb-6">
           Thank you for your order!
         </h2>
@@ -14,7 +14,6 @@ const OrderConfirmation = () => {
           Your order has been successfully placed. Below are the details:
         </p>
 
-        {/* Order Summary */}
         <div className="border-t border-b py-4 mb-6">
           <h3 className="font-semibold text-lg text-gray-800 mb-3">
             Order Summary
@@ -24,11 +23,9 @@ const OrderConfirmation = () => {
               <span>Chicken Tikka Kabab (110g x 3)</span>
               <span className="font-semibold">₨432.655</span>
             </li>
-            {/* Add more items if needed */}
+
           </ul>
         </div>
-
-        {/* Order Details */}
         <div className="mb-6">
           <h3 className="font-semibold text-lg text-gray-800 mb-3">
             Order Details
@@ -41,8 +38,6 @@ const OrderConfirmation = () => {
             Business Days
           </p>
         </div>
-
-        {/* Shipping Address */}
         <div className="mb-6">
           <h3 className="font-semibold text-lg text-gray-800 mb-3">
             Shipping Address
@@ -52,7 +47,6 @@ const OrderConfirmation = () => {
           </p>
         </div>
 
-        {/* Call-to-Actions */}
         <div className="flex flex-col items-center">
           <button
             className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-500 mb-3"

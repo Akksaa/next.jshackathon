@@ -13,7 +13,6 @@ function Page() {
     rememberMe: false,
   });
 
-  // Handle input changes
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -22,11 +21,9 @@ function Page() {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form Data:", formData);
-    // Add your API call or form processing logic here
     const res = await fetch("/api/users/signup", {
       method: "POST",
       credentials: "include",

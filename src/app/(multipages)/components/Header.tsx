@@ -128,7 +128,7 @@ async function Header() {
               </li>
               <li>
               <Link
-                href="./signup"
+                href="../signup"
                 className="group flex items-center  transition-colors duration-300"
               >
                 <span>Sign up</span>

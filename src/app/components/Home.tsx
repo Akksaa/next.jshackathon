@@ -58,7 +58,7 @@ export default async function Home() {
           <div className="w-full flex justify-center pt-6">
             <header className="w-full min-h-[100px] max-w-[1320px] h-[87px] bg-transparent text-white">
               <Link
-                href={"#"}
+                href={"./"}
                 className="text-2xl font-bold openSans text-[24px] leading-[32px] flex justify-center"
               >
                 <p className="text-primYellow">Food</p>
@@ -68,7 +68,7 @@ export default async function Home() {
                 <ul className="lg:flex hidden space-x-6 text-[16px] leading-[24px] inter">
                   <li>
                     <Link
-                      href="#"
+                      href="./"
                       className="relative transition-colors duration-300"
                     >
                       <span className="relative group">
@@ -92,6 +92,7 @@ export default async function Home() {
 
                   <li>
                     <Link
+                    rel="preload"
                       href="./blogs"
                       className="relative transition-colors duration-300"
                     >
@@ -117,22 +118,22 @@ export default async function Home() {
                       <HoverCardContent className="w-[150%] p-3 bg-black opacity-85 border-primYellow">
                         <ul className="text-white inter text-[16px] leading-[24px]">
                           <li className="border-b-[1px] border-zinc-500 py-2">
-                            <Link href={"./signup"}>Sign Up Page</Link>{" "}
+                            <Link rel="preload" href={"./signup"}>Sign Up Page</Link>{" "}
                           </li>
                           <li className="flex gap-1 border-b-[1px] border-zinc-500 py-2">
-                            <Link href={"./login"}> Log In Page</Link>{" "}
+                            <Link rel="preload" href={"./login"}> Log In Page</Link>{" "}
                           </li>
                           <li className="border-b-[1px] border-zinc-500 py-2">
-                            <Link href={"./faq"}>FAQ Page</Link>{" "}
+                            <Link rel="preload" href={"./faq"}>FAQ Page</Link>{" "}
                           </li>
                           <li className="border-b-[1px] border-zinc-500 py-2">
-                            <Link href={"./checkout"}>Check Out Page</Link>
+                            <Link rel="preload" href={"./checkout"}>Check Out Page</Link>
                           </li>
                           <li className="border-b-[1px] border-zinc-500 py-2">
-                            <Link href={"./chefs"}>Our Chefs</Link>
+                            <Link rel="preload" href={"./chefs"}>Our Chefs</Link>
                           </li>
                           <li className="py-2">
-                            <Link href={"./error"}>404 Error Page</Link>{" "}
+                            <Link rel="preload" href={"./error"}>404 Error Page</Link>{" "}
                           </li>
                         </ul>
                       </HoverCardContent>
@@ -140,6 +141,7 @@ export default async function Home() {
                   </li>
                   <li>
                     <Link
+                    rel="preload"
                       href="/about"
                       className="relative transition-colors duration-300"
                     >
@@ -151,6 +153,7 @@ export default async function Home() {
                   </li>
                   <li>
                     <Link
+                    rel="preload"
                       href="/products"
                       className="relative  transition-colors duration-300"
                     >
@@ -162,6 +165,7 @@ export default async function Home() {
                   </li>
                   <li>
                     <Link
+                    rel="preload"
                       href="./signup"
                       className="group flex items-center  transition-colors duration-300"
                     >
@@ -182,7 +186,9 @@ export default async function Home() {
                           className="inline-block hover:text-primYellow transition-colors duration-300 hover:animate-bounce"
                         />
                       </HoverCardTrigger>
-                      <HoverCardContent className="w-[150%] p-3 bg-black opacity-85 border-primYellow">
+                      <HoverCardContent 
+                      rel="preload"
+                      className="w-[150%] p-3 bg-black opacity-85 border-primYellow">
                         <ul className="text-white inter text-[16px] leading-[24px]">
                           <li className="border-b-[1px] border-zinc-500 py-2">
                             <Link href={"./signup"}>Sign Up</Link>{" "}
@@ -211,15 +217,16 @@ export default async function Home() {
 
                   <Sheet>
                     <SheetTrigger>
-                      <div className="flex lg:hidden items-center">
+                      <div rel="preload" className="flex lg:hidden items-center">
                         <CiMenuBurger size={24} />
                       </div>
                     </SheetTrigger>
-                    <SheetContent className="p-3 bg-black opacity-85 text-white border border-black">
+                    <SheetContent rel="preload" className="p-3 bg-black opacity-85 text-white border border-black">
                       <SheetHeader>
                         <SheetTitle className="mt-4">
                           <Link
-                            href={"#"}
+                            rel="preload"
+                            href={"./"}
                             className="text-2xl font-bold openSans text-[24px] leading-[32px] flex justify-center"
                           >
                             <p className="text-primYellow">Food</p>
@@ -228,7 +235,8 @@ export default async function Home() {
                           <ul className="text-white space-y-3 mt-8 text-[16px] leading-[24px] inter">
                             <li>
                               <Link
-                                href={"#"}
+                                rel="preload"
+                                href={"./"}
                                 className="hover:text-primYellow"
                               >
                                 Home
@@ -236,6 +244,7 @@ export default async function Home() {
                             </li>
                             <li>
                               <Link
+                                rel="preload"
                                 href={"./menu"}
                                 className="hover:text-primYellow"
                               >
@@ -244,6 +253,7 @@ export default async function Home() {
                             </li>
                             <li>
                               <Link
+                                rel="preload"
                                 href={"./blogs"}
                                 className="hover:text-primYellow"
                               >
@@ -256,12 +266,17 @@ export default async function Home() {
                               </p>
                             </li>
                             <li>
-                              <Link href="#" className="hover:text-primYellow">
+                              <Link
+                                rel="preload"
+                                href="./about"
+                                className="hover:text-primYellow"
+                              >
                                 About
                               </Link>
                             </li>
                             <li>
                               <Link
+                                rel="preload"
                                 href="./products"
                                 className="hover:text-primYellow"
                               >
@@ -270,6 +285,7 @@ export default async function Home() {
                             </li>
                             <li>
                               <Link
+                                rel="preload"
                                 href="./signup"
                                 className="hover:text-primYellow"
                               >
@@ -278,6 +294,7 @@ export default async function Home() {
                             </li>
                             <li>
                               <Link
+                                rel="preload"
                                 href={"./cart"}
                                 className="hover:text-primYellow"
                               >
