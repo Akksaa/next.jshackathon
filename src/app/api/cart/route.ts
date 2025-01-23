@@ -44,10 +44,10 @@ export const POST = async (request: NextRequest) => {
 
       return NextResponse.json({ success: true, data: res });
     } catch (error) {
-      console.error('Error fetching data from cartTable:', error);
+      console.error('Error updating data to cartTable:', error);
 
       return NextResponse.json(
-        { success: false, message: 'Failed to fetch cart data', error: String(error) },
+        { success: false, message: 'Failed to update cart data', error: String(error) },
         { status: 500 }
       );
     }

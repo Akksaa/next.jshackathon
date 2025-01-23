@@ -29,11 +29,15 @@ function CartDetails({
   // const handleQuantityChange = (change: number) => {
   //   setQuantity((prev) => Math.max(1, prev + change));
   // };
+  const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? `https://${process.env.VERCEL_URL}` // Dynamic Vercel URL
+    : "http://localhost:3000";
 
   const handleDelete = async (product_id: string) => {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/cart?user_id=${cookies}&product_id=${product_id}`,
+        `http://${BASE_URL}/api/cart?user_id=${cookies}&product_id=${product_id}`,
         {
           method: "DELETE",
         }
@@ -42,7 +46,7 @@ function CartDetails({
 
       if (data) {
         const url = await fetch(
-          `http://localhost:3000/api/cart?user_id=${cookies}`
+          `http://${BASE_URL}/api/cart?user_id=${cookies}`
         );
         const cartData = await url.json();
         const cart = cartData.data;
