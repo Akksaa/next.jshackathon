@@ -13,7 +13,12 @@ async function page() {
   
 
   const url = await fetch(
-    `http://localhost:3000/api/cart?user_id=${cartCookies}`
+    `http://localhost:3000/api/cart?user_id=${cartCookies}`,{
+      
+      method: "GET",
+      credentials: "include", // Ensures cookies are sent with the request
+    }
+    
   );
   
   const cartData = await url.json();

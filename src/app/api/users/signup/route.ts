@@ -33,11 +33,12 @@ export const POST = async (request: NextRequest) => {
   const uid = uuid();
   cookies().set("user_id", uid, {
     httpOnly: true,
-    secure: false,
-    sameSite: "strict",
-    path: "/", 
-    maxAge: 60 * 60 * 24 * 7,
+    secure: process.env.NODE_ENV === "production", // Automatically handle secure settings
+    sameSite: "lax", // Allow cookies for navigation and API calls
+    path: "/", // Cookie is accessible across the entire domain
+    maxAge: 60 * 60 * 24 * 7, // Cookie expires in 7 days
   });
+  
  
  
   const user = await db

@@ -47,6 +47,7 @@ export async function POST(request: NextRequest) {
     });
     return response;
     
+    
   } catch (error) {
     console.error("Error fetching data from userTable:", error);
 

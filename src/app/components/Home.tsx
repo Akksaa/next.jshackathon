@@ -807,14 +807,14 @@ export default async function Home() {
           </div>
         </main>
       </div>
-      <div className="bg-black">
-        <Image
+      <div className="bg-black flex justify-center sm:h-[560px] w-full bg-[url('/box3.png')] bg-cover h-full">
+        {/* <Image
           src={"/box3.png"}
           alt=""
           width={1920}
           height={560}
           className="sm:py-12 py-4"
-        />
+        /> */}
       </div>
       <div className="h-full w-full">
         <main className="bg-black w-full justify-center text-white flex items-center p-3 lg:p-6 xl:p-0">
