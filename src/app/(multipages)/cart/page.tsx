@@ -11,14 +11,15 @@ async function page() {
   const cartCookies = cookies().get("user_id")?.value;
   console.log(cartCookies); 
   
-  const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? `https://${process.env.VERCEL_URL}` // Dynamic Vercel URL
-    : "http://localhost:3000";
+  // const BASE_URL =
+  // process.env.NODE_ENV === "production"
+  //   ? `https://${process.env.VERCEL_URL}` // Dynamic Vercel URL
+  //   : "http://localhost:3000";
   
   const url = await fetch(
-    `${BASE_URL}/api/cart?user_id=${cartCookies}`,{
+    `http://localhost:3000/api/cart?user_id=${cartCookies}`,{
       method: "GET",
+      credentials: "include", // Ensures cookies are sent with the request
     }
     
   );
