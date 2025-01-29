@@ -10,16 +10,12 @@ async function page() {
 
   const cartCookies = cookies().get("user_id")?.value;
   console.log(cartCookies); 
-  
-  // const BASE_URL =
-  // process.env.NODE_ENV === "production"
-  //   ? `https://${process.env.VERCEL_URL}` // Dynamic Vercel URL
-  //   : "http://localhost:3000";
+
   
   const url = await fetch(
     `http://localhost:3000/api/cart?user_id=${cartCookies}`,{
       method: "GET",
-      credentials: "include", // Ensures cookies are sent with the request
+      credentials: "include",
     }
     
   );
@@ -36,11 +32,6 @@ async function page() {
       total + item.product_price * item.product_quantity,
     0
   );
-  // const cartQuantity = cart.reduce(
-  //   (quantity: number, item: Cart) =>
-  //     quantity + item.product_quantity,
-  //   0
-  // );
  
   const shipping = 0;
   const total = subtotal + shipping;

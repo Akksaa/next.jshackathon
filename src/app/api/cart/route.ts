@@ -15,9 +15,9 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json({ data: res });
   } catch (error: unknown) {
     if (error instanceof Error) {
-      return { error: error.message }
+      return NextResponse.json({ success: false, message:error.message }, { status: 500 });
+
     }
-    return NextResponse.json({ success: false }, { status: 500 });
 
   }
 };
@@ -41,10 +41,9 @@ export const POST = async (request: NextRequest) => {
     return NextResponse.json({ success: true, data: res });
   } catch (error: unknown) {
     if (error instanceof Error) {
-      return { error: error.message };
-    }
+      return NextResponse.json({ success: false, message:error.message }, { status: 500 });
 
-    return NextResponse.json({ success: false }, { status: 500 });
+    }
   }
 };
 
@@ -63,8 +62,8 @@ export const DELETE = async (request: NextRequest) => {
     return NextResponse.json({ data: res });
   } catch (error: unknown) {
     if (error instanceof Error) {
-      return { error: error.message };
+      return NextResponse.json({ success: false, message:error.message }, { status: 500 });
+
     }
-    return NextResponse.json({ success: false }, { status: 500 });
   }
 };

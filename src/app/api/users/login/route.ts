@@ -41,8 +41,6 @@ export async function POST(request: NextRequest) {
     
     
   } catch (error) {
-    console.error("Error fetching data from userTable:", error);
-
     return NextResponse.json(
       {
         success: false,

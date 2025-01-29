@@ -56,9 +56,6 @@ export const POST = async (request: NextRequest) => {
       data: res,
     });
   } catch (error) {
-    if (error instanceof Error) {
-      console.error("Error inserting data into userTable:",error.message);
-    }
     
     return NextResponse.json(
       {
