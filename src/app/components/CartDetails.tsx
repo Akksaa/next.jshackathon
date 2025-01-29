@@ -8,14 +8,12 @@ import toast, { Toaster } from "react-hot-toast";
 function CartDetails({
   cookies,
   cart,
-  // quantity,
   subtotal,
   shipping,
   total,
 }: {
   cookies: string | undefined;
   cart: Cart[];
-  // quantity: number;
   subtotal: number;
   shipping: number;
   total: number;
@@ -24,9 +22,40 @@ function CartDetails({
   const [cartSubtotal, setSubtotal] = useState(subtotal);
   const [cartShipping, setShipping] = useState(shipping);
   const [CartTotal, setTotal] = useState(total);
-  
+
+  const fetchCartData = async (userId: string) => {
+    try {
+      const url = await fetch(`/api/cart?user_id=${userId}`);
+      if (!url.ok) throw new Error('Failed to fetch cart data');
+      
+      const cartData = await url.json();
+      if (!cartData.data) throw new Error('Invalid cart data received');
+
+      const newCart = cartData.data;
+      const newSubtotal = newCart.reduce(
+        (total: number, item: Cart) =>
+          total + item.product_price * item.product_quantity,
+        0
+      );
+      const newShipping = 0;
+      const newTotal = newSubtotal + newShipping;
+
+      setCartItem(newCart);
+      setSubtotal(newSubtotal);
+      setShipping(newShipping);
+      setTotal(newTotal);
+    } catch (error) {
+      console.error("Error fetching cart:", error);
+      toast.error("Failed to update cart data");
+    }
+  };
 
   const HandleDelete = async (product_id: string) => {
+    if (!cookies) {
+      toast.error("User session not found");
+      return;
+    }
+
     try {
       const res = await fetch(
         `/api/cart?user_id=${cookies}&product_id=${product_id}`,
@@ -34,37 +63,44 @@ function CartDetails({
           method: "DELETE",
         }
       );
+
+      if (!res.ok) {
+        throw new Error('Failed to delete item');
+      }
+
       const data = await res.json();
 
-      if (data) {
-        const url = await fetch(
-          `/api/cart?user_id=${cookies}`
-        );
-        const cartData = await url.json();
-        const cart = cartData.data;
-        const subtotal = cart.reduce(
-          (total: number, item: Cart) =>
-            total + item.product_price * item.product_quantity,
-          0
-        );
-        const shipping = 0;
-        const total = subtotal + shipping;
-
-        
-        setCartItem(cart);
-        setSubtotal(subtotal);
-        setShipping(shipping);
-        setTotal(total);
+      if (data.success) {
+        await fetchCartData(cookies);
         toast.success("Item deleted successfully!");
-
-        
       } else {
-        console.error("Failed to delete item:", data.message);
-        toast.error("Failed to delete item. Try again!");
+        throw new Error(data.message || 'Failed to delete item');
       }
     } catch (error) {
       console.error("Error deleting item:", error);
-      toast.error("An error occurred while deleting the item.");
+      toast.error("Failed to delete item. Please try again!");
+    }
+  };
+
+  const renderImage = (imageUrl: string, title: string) => {
+    try {
+      const image = JSON.parse(imageUrl);
+      return (
+        <Image
+          src={image.asset.url}
+          alt={title}
+          width={120}
+          height={120}
+          className="w-[80px] h-[80px] rounded-md object-cover border"
+        />
+      );
+    } catch (error) {
+      console.error("Error parsing image URL:", error);
+      return (
+        <div className="w-[80px] h-[80px] rounded-md border bg-gray-200 flex items-center justify-center">
+          <span className="text-xs text-gray-500">Image Error</span>
+        </div>
+      );
     }
   };
 
@@ -85,20 +121,20 @@ function CartDetails({
 
               <div className="lg:space-y-6 space-y-3">
                 {cartItem.map((item: Cart) => {
-                  const image = JSON.parse(item.image_url);
                   return (
                     <li
                       key={item.id}
                       className="flex flex-col md:flex-row items-center md:justify-between bg-white p-4 rounded-md shadow-sm border border-gray-200"
                     >
                       <div className="flex items-center md:space-x-4 space-x-2 md:col-span-2">
-                        <Image
+                        {/* <Image
                           src={image.asset.url}
                           alt={item.product_title}
                           width={120}
                           height={120}
                           className="w-[80px] h-[80px] rounded-md object-cover border"
-                        />
+                        /> */}
+                        {renderImage(item.image_url, item.product_title)}
                         <div>
                           <p className="md:text-[20px] text-sm font-medium text-gray-800 openSans">
                             {item.product_title}

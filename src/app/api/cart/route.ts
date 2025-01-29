@@ -14,7 +14,7 @@ export const GET = async (request: NextRequest) => {
       .where(eq(cartTable.user_id, uid));
 
     return NextResponse.json({ data: res });
-    
+
   } catch (error: unknown) {
     if (error instanceof Error) {
       return NextResponse.json({ success: false, message:error.message }, { status: 500 });
@@ -53,7 +53,6 @@ export const DELETE = async (request: NextRequest) => {
   const req = request.nextUrl;
   const uid = req.searchParams.get("user_id") as string;
   const product_id = req.searchParams.get("product_id") as string;
-  console.log("product id", product_id);
 
   try {
     const deleteCondition = product_id
