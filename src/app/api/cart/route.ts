@@ -15,8 +15,10 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json({ data: res });
   } catch (error: unknown) {
     if (error instanceof Error) {
-      return { error: error.message };
+      return { error: error.message }
     }
+    return NextResponse.json({ success: false }, { status: 500 });
+
   }
 };
 
