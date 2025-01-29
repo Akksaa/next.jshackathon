@@ -18,7 +18,6 @@ import { allProductsQuery } from "@/app/lib/queries";
 import { client } from "@/sanity/lib/client";
 import { FoodProduct } from "@/types/FoodProduct";
 
-
 async function Header() {
   const products = await client.fetch<FoodProduct[]>(allProductsQuery);
   console.log(products);
@@ -38,47 +37,47 @@ async function Header() {
           <div>
             <ul className="lg:flex hidden space-x-6 text-[16px] leading-[24px] inter">
               <li>
-              <Link
-                href="/"
-                className="relative transition-colors duration-300"
-              >
-                <span className="relative group">
-                  Home
-                  <span className="absolute left-0 bottom-0  w-full h-[2px] bg-primYellow transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
-                </span>
-              </Link>
+                <Link
+                  href="/"
+                  className="relative transition-colors duration-300"
+                >
+                  <span className="relative group">
+                    Home
+                    <span className="absolute left-0 bottom-0  w-full h-[2px] bg-primYellow transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
+                  </span>
+                </Link>
               </li>
               <li>
-              <Link
-                href="./menu"
-                className="relative transition-colors duration-300"
-              >
-                <span className="relative group">
-                  Menu
-                  <span className="absolute left-0 bottom-0  w-full h-[2px] bg-primYellow transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
-                </span>
-              </Link>
+                <Link
+                  href="./menu"
+                  className="relative transition-colors duration-300"
+                >
+                  <span className="relative group">
+                    Menu
+                    <span className="absolute left-0 bottom-0  w-full h-[2px] bg-primYellow transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
+                  </span>
+                </Link>
               </li>
               <li>
-              <Link
-                href="../blogs"
-                className="relative transition-colors duration-300"
-              >
-                <span className="relative group">
-                  Blogs
-                  <span className="absolute left-0 bottom-0  w-full h-[2px] bg-primYellow transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
-                </span>
-              </Link>
+                <Link
+                  href="../blogs"
+                  className="relative transition-colors duration-300"
+                >
+                  <span className="relative group">
+                    Blogs
+                    <span className="absolute left-0 bottom-0  w-full h-[2px] bg-primYellow transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
+                  </span>
+                </Link>
               </li>
               <HoverCard>
                 <HoverCardTrigger>
                   <li>
-                  <p className="relative transition-colors duration-300">
-                    <span className="relative group">
-                      Pages
-                      <span className="absolute left-0 bottom-0  w-full h-[2px] bg-primYellow transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
-                    </span>
-                  </p>
+                    <p className="relative transition-colors duration-300">
+                      <span className="relative group">
+                        Pages
+                        <span className="absolute left-0 bottom-0  w-full h-[2px] bg-primYellow transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
+                      </span>
+                    </p>
                   </li>
                 </HoverCardTrigger>
                 <HoverCardContent className="w-[150%] p-3 bg-black opacity-85 border-primYellow">
@@ -105,76 +104,58 @@ async function Header() {
                 </HoverCardContent>
               </HoverCard>
               <li>
-              <Link
-                href="../about"
-                className="relative transition-colors duration-300"
-              >
-                <span className="relative group">
-                  About
-                  <span className="absolute left-0 bottom-0  w-full h-[2px] bg-primYellow transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
-                </span>
-              </Link>
+                <Link
+                  href="../about"
+                  className="relative transition-colors duration-300"
+                >
+                  <span className="relative group">
+                    About
+                    <span className="absolute left-0 bottom-0  w-full h-[2px] bg-primYellow transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
+                  </span>
+                </Link>
               </li>
               <li>
-              <Link
-                href="../products"
-                className="relative transition-colors duration-300"
-              >
-                <span className="relative group">
-                  Shop
-                  <span className="absolute left-0 bottom-0  w-full h-[2px] bg-primYellow transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
-                </span>
-              </Link>
+                <Link
+                  href="../products"
+                  className="relative transition-colors duration-300"
+                >
+                  <span className="relative group">
+                    Shop
+                    <span className="absolute left-0 bottom-0  w-full h-[2px] bg-primYellow transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
+                  </span>
+                </Link>
               </li>
               <li>
-              <Link
-                href="../signup"
-                className="group flex items-center  transition-colors duration-300"
-              >
-                <span>Sign up</span>
-                <span className="inline-block transform translate-x-0 opacity-0 group-hover:translate-x-2 group-hover:opacity-100 group-hover:text-primYellow transition-all duration-300">
-                  →
-                </span>
-              </Link>
+                <Link
+                  href="../signup"
+                  className="group flex items-center  transition-colors duration-300"
+                >
+                  <span>Sign up</span>
+                  <span className="inline-block transform translate-x-0 opacity-0 group-hover:translate-x-2 group-hover:opacity-100 group-hover:text-primYellow transition-all duration-300">
+                    →
+                  </span>
+                </Link>
               </li>
             </ul>
           </div>
           <div className="flex items-center gap-2 relative">
             <div className="hidden md:flex">
-               <ProductSearch products={products} />
-
+              <ProductSearch products={products} />
             </div>
-            <HoverCard>
-              <HoverCardTrigger>
-                <CiUser
-                  size={24}
-                  className="inline-block hover:text-primYellow transition-colors duration-300 hover:animate-bounce"
-                />
-              </HoverCardTrigger>
-              <HoverCardContent className="w-[150%] p-3 bg-black opacity-85 border-primYellow">
-                <ul className="text-white inter text-[16px] leading-[24px]">
-                  <li className="border-b-[1px] border-zinc-500 py-2">
-                    <Link href={"./signup"}>Sign Up</Link>{" "}
-                  </li>
-                  <li className="flex gap-1 border-b-[1px] border-zinc-500 py-2">
-                    <Link href={"/"}> My Account</Link>{" "}
-                  </li>
-                  <li className="border-b-[1px] border-zinc-500 py-2">
-                    <Link href={"/"}>My Orders</Link>{" "}
-                  </li>
-                  <li className="py-2">
-                    <Link href={"/"}>Log Out</Link>{" "}
-                  </li>
-                </ul>
-              </HoverCardContent>
-            </HoverCard>
+            <Link href={"/profile"}>
+              <CiUser
+                size={24}
+                className="inline-block hover:text-primYellow transition-colors duration-300 hover:animate-bounce"
+              />
+            </Link>
+
             <div className="hidden lg:flex mt-1">
-              <a
+              <Link
                 href="../cart"
                 className="inline-block hover:text-primYellow transition-colors duration-300 hover:animate-bounce"
               >
                 <CiBag1 size={24} />
-              </a>
+              </Link>
             </div>
             <Sheet>
               <SheetTrigger>
@@ -199,7 +180,10 @@ async function Header() {
                         </Link>
                       </li>
                       <li>
-                        <Link href={"../menu"} className="hover:text-primYellow">
+                        <Link
+                          href={"../menu"}
+                          className="hover:text-primYellow"
+                        >
                           Menu
                         </Link>
                       </li>

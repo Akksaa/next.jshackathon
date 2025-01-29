@@ -8,7 +8,6 @@ import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 async function page() {
   
     const products = await client.fetch<FoodProduct[]>(allProductsQuery)
-    console.log(products);
     
   return (
     <div>

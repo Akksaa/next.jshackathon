@@ -2,28 +2,8 @@ import { db, userTable } from "@/app/lib/drizzle";
 import { NextResponse, NextRequest } from "next/server";
 import { eq } from "drizzle-orm";
 import bcryptjs from "bcryptjs";
-import { sendEmail } from "@/helpers/mailer";
 import { v4 as uuid } from "uuid";
 import { cookies } from "next/headers";
-
-export const GET = async (request: NextRequest) => {
-
-  const req = request.nextUrl;
-  const uid = req.searchParams.get('user_id') as string;
-
-    try {
-
-      const res = await db.select().from(userTable).where(eq(userTable.id, uid));
-      return NextResponse.json({data : res});
-    } catch (error) {
-      console.error('Error fetching data from userTable:', error);
-
-      return NextResponse.json(
-        { success: false, message: 'Failed to fetch user data', error: String(error) },
-        { status: 500 }
-      );
-    }
-};
 
 export const POST = async (request: NextRequest) => {
   const req = await request.json();
@@ -31,12 +11,12 @@ export const POST = async (request: NextRequest) => {
 
   
   const uid = uuid();
-  cookies().set("user_id", uid, {
+    cookies().set("user_id", uid, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production", // Automatically handle secure settings
-    sameSite: "lax", // Allow cookies for navigation and API calls
-    path: "/", // Cookie is accessible across the entire domain
-    maxAge: 60 * 60 * 24 * 7, // Cookie expires in 7 days
+    secure: process.env.NODE_ENV === "production", 
+    sameSite: "lax", 
+    path: "/", 
+    maxAge: 60 * 60 * 24 * 7, 
   });
   
  
@@ -68,17 +48,18 @@ export const POST = async (request: NextRequest) => {
         password: hashedPassword,
       })
       .returning();
-
     
-    await sendEmail({ email, emailType: "VERIFY", userId: res[0].id });
+      console.log('response from api/signup', res)
 
     return NextResponse.json({
       message: "User Registered Successfully!",
       data: res,
     });
   } catch (error) {
-    console.error("Error inserting data into userTable:", error);
-
+    if (error instanceof Error) {
+      console.error("Error inserting data into userTable:",error.message);
+    }
+    
     return NextResponse.json(
       {
         success: false,

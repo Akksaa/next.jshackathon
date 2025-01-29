@@ -3,6 +3,7 @@
 import { FoodProduct } from '@/types/FoodProduct'
 import { RiShoppingBagLine } from 'react-icons/ri'
 import { useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 
 
 function AddToCart({ product }: { product: FoodProduct }) {
@@ -28,9 +29,9 @@ function AddToCart({ product }: { product: FoodProduct }) {
       })
     });
     if (res .status == 500) {
-      alert('Please sign up first!')
+      toast.error('Product is already added in the Cart!')
     } else {
-      alert('Product Added to Cart!')
+      toast.success('Product Added To Your Bag!')
 
     }
     const result = await res.json();
@@ -40,6 +41,7 @@ function AddToCart({ product }: { product: FoodProduct }) {
 
   return (
     <div>
+      <Toaster position="top-center"/>
       <div className='flex gap-3'>
       <div>
         <div className="flex items-center space-x-4">

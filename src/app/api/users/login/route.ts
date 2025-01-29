@@ -1,7 +1,6 @@
 import { db, userTable } from "@/app/lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
-import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 
 export async function POST(request: NextRequest) {
@@ -32,19 +31,12 @@ export async function POST(request: NextRequest) {
       );
 
     }
-    const payload = {
-      id: user[0].id,
-    };
-    const token = jwt.sign(payload, process.env.JWT_SECRET!, {
-      expiresIn: "1h",
-    });
+ 
     const response = NextResponse.json({
       message: "Logged In successfully!",
       success: true,
     });
-    response.cookies.set("token", token, {
-      httpOnly: true,
-    });
+   
     return response;
     
     

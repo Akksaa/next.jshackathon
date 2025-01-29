@@ -3,6 +3,7 @@ import { Cart } from "@/types/Cart";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 function CartDetails({
   cookies,
@@ -31,7 +32,7 @@ function CartDetails({
   // };
   
 
-  const handleDelete = async (product_id: string) => {
+  const HandleDelete = async (product_id: string) => {
     try {
       const res = await fetch(
         `http://localhost:3000/api/cart?user_id=${cookies}&product_id=${product_id}`,
@@ -55,25 +56,30 @@ function CartDetails({
         const shipping = 0;
         const total = subtotal + shipping;
 
+        
         setCartItem(cart);
         setSubtotal(subtotal);
         setShipping(shipping);
         setTotal(total);
-        alert("Item deleted successfully!");
+        toast.success("Item deleted successfully!");
+
+        
       } else {
         console.error("Failed to delete item:", data.message);
-        alert("Failed to delete item. Try again!");
+        toast.error("Failed to delete item. Try again!");
       }
     } catch (error) {
       console.error("Error deleting item:", error);
-      alert("An error occurred while deleting the item.");
+      toast.error("An error occurred while deleting the item.");
     }
   };
 
   return (
     <>
+     <Toaster position="top-center"/>
       {cartItem.length > 0 ? (
         <>
+       
           <div className="w-full flex justify-center items-center">
             <ul className="2xl:w-[1320px] w-full lg:px-12  px-4 py-8 my-8  rounded-lg shadow-md">
               <li className="hidden md:grid grid-cols-5 items-center w-full openSans text-gray-700 font-semibold text-sm border-b pb-4">
@@ -104,7 +110,7 @@ function CartDetails({
                             {item.product_title}
                           </p>
                           <button
-                            onClick={() => handleDelete(item.product_id)}
+                            onClick={() => HandleDelete(item.product_id)}
                             className="md:text-sm text-[10px] text-red-500 inter hover:text-red-600 transition duration-150 ease-in-out mt-2"
                           >
                             Remove
