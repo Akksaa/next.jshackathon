@@ -4,38 +4,33 @@ import { cookies } from "next/headers";
 import { Cart } from "@/types/Cart";
 // import Link from 'next/link'
 import CartDetails from "@/app/components/CartDetails";
- 
 
 async function page() {
-
   const cartCookies = cookies().get("user_id")?.value;
-  console.log(cartCookies); 
+  console.log(cartCookies);
 
-  
-  const url = await fetch(
-    `http://localhost:3000/api/cart?user_id=${cartCookies}`,{
-      method: "GET",
-      credentials: "include",
-    }
-    
-  );
-  
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  const url = await fetch(`${API_URL}/api/cart?user_id=${cartCookies}`, {
+    method: "GET",
+    credentials: "include",
+  });
+
   const cartData = await url.json();
   const cart = cartData.data;
 
-  if (url.status == 500 || !cart ) {
-    alert('sign up to access your cart!')
+  if (url.status == 500 || !cart) {
+    alert("sign up to access your cart!");
   }
-  console.log('cart', cart)
+  console.log("cart", cart);
   const subtotal = cart.reduce(
     (total: number, item: Cart) =>
       total + item.product_price * item.product_quantity,
     0
   );
- 
+
   const shipping = 0;
   const total = subtotal + shipping;
-
 
   return (
     <div>

@@ -54,13 +54,14 @@ export const DELETE = async (request: NextRequest) => {
   const uid = req.searchParams.get("user_id") as string;
   const product_id = req.searchParams.get("product_id") as string;
 
+
   try {
     const deleteCondition = product_id
       ? and(eq(cartTable.user_id, uid), eq(cartTable.product_id, product_id))
       : eq(cartTable.user_id, uid);
 
     const res = await db.delete(cartTable).where(deleteCondition).returning();
-    return NextResponse.json({ data: res });
+    return NextResponse.json({ data: res , success:true });
   } catch (error: unknown) {
     if (error instanceof Error) {
       return NextResponse.json({ success: false, message:error.message }, { status: 500 });

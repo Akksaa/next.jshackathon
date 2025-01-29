@@ -23,9 +23,11 @@ function CartDetails({
   const [cartShipping, setShipping] = useState(shipping);
   const [CartTotal, setTotal] = useState(total);
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   const fetchCartData = async (userId: string) => {
     try {
-      const url = await fetch(`/api/cart?user_id=${userId}`);
+      const url = await fetch(`${API_URL}/api/cart?user_id=${userId}`);
       if (!url.ok) throw new Error('Failed to fetch cart data');
       
       const cartData = await url.json();
@@ -58,7 +60,7 @@ function CartDetails({
 
     try {
       const res = await fetch(
-        `/api/cart?user_id=${cookies}&product_id=${product_id}`,
+        `${API_URL}/api/cart?user_id=${cookies}&product_id=${product_id}`,
         {
           method: "DELETE",
         }
