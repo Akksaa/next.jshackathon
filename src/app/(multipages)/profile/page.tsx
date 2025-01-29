@@ -28,15 +28,16 @@ export default function ProfilePage() {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/users/me");
+        const res = await axios.get("/api/users/me");
         setUserData(res.data.data[0]); // Store the fetched data in state
         setLoading(false);
         console.log("user data", res.data.data[0]);
       } catch (error) {
         if (error instanceof Error) {
-          console.error("Error fetching profile data:", error);
           setError(error.message); // Store the error in state
           setLoading(false);
+          return { error: error.message}
+          
         }
       }
     };
