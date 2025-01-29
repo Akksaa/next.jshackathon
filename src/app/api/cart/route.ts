@@ -12,7 +12,9 @@ export const GET = async (request: NextRequest) => {
       .select()
       .from(cartTable)
       .where(eq(cartTable.user_id, uid));
+
     return NextResponse.json({ data: res });
+    
   } catch (error: unknown) {
     if (error instanceof Error) {
       return NextResponse.json({ success: false, message:error.message }, { status: 500 });

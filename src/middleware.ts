@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (!isPublicPath && !user_id) {
-    return NextResponse.redirect(new URL('/login', request.nextUrl))
+    return NextResponse.redirect(new URL('/signup', request.nextUrl))
   }
     
 }

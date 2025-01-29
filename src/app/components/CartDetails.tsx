@@ -24,18 +24,12 @@ function CartDetails({
   const [cartSubtotal, setSubtotal] = useState(subtotal);
   const [cartShipping, setShipping] = useState(shipping);
   const [CartTotal, setTotal] = useState(total);
-
-  // const [Quantity, setQuantity] = useState(quantity);
-
-  // const handleQuantityChange = (change: number) => {
-  //   setQuantity((prev) => Math.max(1, prev + change));
-  // };
   
 
   const HandleDelete = async (product_id: string) => {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/cart?user_id=${cookies}&product_id=${product_id}`,
+        `/api/cart?user_id=${cookies}&product_id=${product_id}`,
         {
           method: "DELETE",
         }
@@ -44,7 +38,7 @@ function CartDetails({
 
       if (data) {
         const url = await fetch(
-          `http://localhost:3000/api/cart?user_id=${cookies}`
+          `/api/cart?user_id=${cookies}`
         );
         const cartData = await url.json();
         const cart = cartData.data;
