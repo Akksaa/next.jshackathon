@@ -7,7 +7,7 @@ import { FoodProduct } from "@/types/FoodProduct";
 import React, { useEffect, useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
-function page() {
+function Page() {
   const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState<FoodProduct[]>();
 
@@ -41,4 +41,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

@@ -5,8 +5,8 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Loading from "./Loading";
-import { totalPrice } from "@/helpers/totalPrice";
-import { DeleteIcon, Trash2Icon } from "lucide-react";
+// import { totalPrice } from "@/helpers/totalPrice";
+import { Trash2Icon } from "lucide-react";
 
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -46,7 +46,7 @@ function CartDetails({
             total + item.product_price * item.product_quantity,
           0
         );
-        const amount = totalPrice(subtotal);
+        // const amount = totalPrice(subtotal);
 
         setCartItem(newCart);
         setSubtotal(newSubtotal);

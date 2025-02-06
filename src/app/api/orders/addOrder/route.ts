@@ -2,8 +2,6 @@ import { cartTable, db, userTable } from "@/app/lib/drizzle";
 import { shipmentQuery } from "@/app/lib/queries";
 import { totalPrice } from "@/helpers/totalPrice";
 import { client } from "@/sanity/lib/client";
-import { ShipmentInfo } from "@/types/ShipmentInfo";
-import axios from "axios";
 import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -38,7 +36,7 @@ export async function POST() {
     console.log("shipment info",shipmentInfo)
 
     const matchedShipment = shipmentInfo.find(
-      (shipment: { userId: any; userName: string; }) => 
+      (shipment: { userId: string; userName: string; }) => 
         shipment.userId === id 
     );
     

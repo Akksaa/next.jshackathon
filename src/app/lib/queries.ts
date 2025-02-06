@@ -1,5 +1,4 @@
 import { client } from "@/sanity/lib/client";
-import { cookies } from "next/headers";
 
 export const allProductsQuery = `*[ _type == "foodProduct"]{
     _id,
@@ -90,5 +89,3 @@ orderId,
   const orders = await client.fetch(queryForOrder);
   return orders;
 };
-
-

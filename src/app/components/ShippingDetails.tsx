@@ -6,7 +6,7 @@ import React from "react";
 import { orderData } from "../lib/queries";
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { MapPin, Calendar, Clock, Scale, Box } from "lucide-react";
-import { Truck, SendHorizontal } from "lucide-react";
+import { Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   FileDown,
@@ -15,6 +15,7 @@ import {
   CalendarClock,
   DollarSign,
 } from "lucide-react";
+import { Order } from "@/types/Orders";
 
 interface ShipmentRate {
   shipFrom: Address;

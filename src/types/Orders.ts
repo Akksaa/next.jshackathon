@@ -29,7 +29,7 @@ interface ShipmentInfo {
     status: string;
   }
   
-  interface Order {
+export interface Order {
     _id: string;
     orderId:string;
     customerId: string;
