@@ -2,8 +2,9 @@ import React from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { cookies } from "next/headers";
 import { Cart } from "@/types/Cart";
-// import Link from 'next/link'
 import CartDetails from "@/app/components/CartDetails";
+import Loading from "@/app/components/Loading";
+import { totalPrice } from "@/helpers/totalPrice";
 
 async function page() {
   const cartCookies = cookies().get("user_id")?.value;
@@ -29,8 +30,14 @@ async function page() {
     0
   );
 
-  const shipping = 0;
-  const total = subtotal + shipping;
+  const amount = totalPrice(subtotal);
+  
+
+  if (!cart) {
+    return (
+    <Loading/>
+    );
+  }
 
   return (
     <div>
@@ -48,13 +55,13 @@ async function page() {
           </ul>
         </div>
       </div>
-      <CartDetails
-        cookies={cartCookies}
-        cart={cart}
-        total={total}
-        subtotal={subtotal}
-        shipping={shipping}
-      />
+  <CartDetails
+    cookies={cartCookies}
+    cart={cart}
+    total={amount.total}
+    subtotal={subtotal}
+    shipping={amount.shipping}
+  />
     </div>
   );
 }

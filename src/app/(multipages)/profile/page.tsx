@@ -5,22 +5,27 @@ import LogoutButton from "@/app/components/LogoutButton";
 import Loading from "@/app/components/Loading";
 import ErrorComponent from "@/app/components/Error";
 import React from "react";
+import moment from "moment";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import {
   ArrowRight,
   Bell,
+  Calendar,
   Edit,
   Lock,
   Mail,
   Settings,
+  ShoppingBagIcon,
   User,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function ProfilePage() {
   const [userData, setUserData] = useState({
     id: "",
     username: "",
     email: "",
+    created: "",
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -29,15 +34,14 @@ export default function ProfilePage() {
     const fetchProfileData = async () => {
       try {
         const res = await axios.get("/api/users/me");
-        setUserData(res.data.data[0]); // Store the fetched data in state
+        setUserData(res.data.data[0]);
         setLoading(false);
         console.log("user data", res.data.data[0]);
       } catch (error) {
         if (error instanceof Error) {
-          setError(error.message); // Store the error in state
+          setError(error.message);
           setLoading(false);
-          return { error: error.message}
-          
+          return { error: error.message };
         }
       }
     };
@@ -70,14 +74,10 @@ export default function ProfilePage() {
         </div>
       </div>
       {userData ? (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex flex-col items-center justify-center p-4">
-          <div className="bg-white shadow-2xl rounded-2xl p-8 max-w-md w-full transform transition-all hover:scale-105">
-            {/* Profile Header */}
-            <div className="flex items-center justify-between mb-8">
-              <h1 className="text-3xl font-bold inter text-gray-800">
-                Welcome back!
-              </h1>
-              <div className="flex space-x-2">
+        <div className="min-h-screen flex flex-col items-center justify-center md:p-4 p-2">
+          <div className="bg-white shadow-2xl rounded-md md:p-8 p-3 max-w-md w-full">
+            <div className="flex items-center justify-end md:mb-8 mb-4">
+              <div className="flex md:space-x-2">
                 <button className="p-2 text-gray-600 hover:text-primYellow transition-colors">
                   <Bell size={20} />
                 </button>
@@ -87,7 +87,7 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <div className="relative w-24 h-24 mx-auto mb-6">
+            <div className="relative md:w-24 w-16 h-16 md:h-24 mx-auto md:mb-6 mb-3">
               <div className="w-full h-full rounded-full openSans bg-gradient-to-r from-primYellow to-orange-200 flex items-center justify-center text-white text-3xl font-bold">
                 {userData?.username?.charAt(0).toUpperCase()}
               </div>
@@ -97,30 +97,43 @@ export default function ProfilePage() {
             </div>
 
             {userData && (
-              <div className="space-y-6 inter">
-                <div className="bg-gray-50 rounded-xl p-4 transition-all hover:bg-gray-100">
+              <div className="md:space-y-6 space-y-2 inter">
+                <div className="bg-gray-50 rounded-md p-4 transition-all hover:bg-gray-100">
                   <div className="flex items-center space-x-3">
                     <User className="text-primYellow" />
                     <div>
-                      <label className="block text-sm font-semibold text-gray-600">
+                      <label className="block md:text-sm text-[12px] font-semibold text-gray-600">
                         Username
                       </label>
-                      <p className="text-lg font-medium text-gray-900">
+                      <p className="md:text-[16px] text-[14px] font-medium text-gray-900">
                         {userData.username}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-gray-50 rounded-xl p-4 transition-all hover:bg-gray-100">
+                <div className="bg-gray-50 rounded-md p-4 transition-all hover:bg-gray-100">
                   <div className="flex items-center space-x-3">
                     <Mail className="text-primYellow" />
                     <div>
-                      <label className="block text-sm font-semibold text-gray-600">
+                      <label className="block md:text-sm text-[12px] font-semibold text-gray-600">
                         Email
                       </label>
-                      <p className="text-lg font-medium text-gray-900">
+                      <p className="md:text-[16px] text-[14px] font-medium text-gray-900">
                         {userData.email}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-gray-50 rounded-md p-4 transition-all hover:bg-gray-100">
+                  <div className="flex items-center space-x-3">
+                    <Calendar className="text-primYellow" />
+                    <div>
+                      <label className="block md:text-sm text-[12px] font-semibold text-gray-600">
+                        Member Since
+                      </label>
+                      <p className="md:text-[16px] text-[14px] font-medium text-gray-900">
+                        {moment(userData.created).format("YYYY-MM-DD")}
                       </p>
                     </div>
                   </div>
@@ -128,9 +141,16 @@ export default function ProfilePage() {
               </div>
             )}
 
-            {/* Logout Button */}
             <div>
               <LogoutButton userId={userData.id} />
+              <div>
+                <Link href={"./products"}>
+                  <button className="mt-2 w-full bg-white openSans text-primYellow py-3 px-6 rounded-md font-semibold flex items-center justify-center space-x-2 border-primYellow border-[1px] hover:border-none  hover:bg-primYellow hover:text-white transition-colors">
+                    <ShoppingBagIcon size={20} />
+                    <span>Continue Shopping</span>
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

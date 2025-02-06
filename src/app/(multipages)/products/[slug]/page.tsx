@@ -12,6 +12,7 @@ import MoreProducts from "@/app/components/MoreProducts";
 import AddToCart from "@/app/components/AddToCart";
 import ProductBadges from "@/app/components/ProductBadges";
 import { FoodProduct } from "@/types/FoodProduct";
+import Loading from "@/app/components/Loading";
 
 export default async function ProductDetails({
   params,
@@ -44,24 +45,9 @@ export default async function ProductDetails({
   const product = await client.fetch<FoodProduct>(oneProduct, {
     slug: params.slug,
   });
-  if (!product.price) {
-    return (
-      <div className="flex flex-col items-center w-full justify-center h-screen bg-gray-50 rounded-lg">
-        <div className="animate-pulse space-y-4 w-full max-w-2xl px-4">
-          <div className="text-center space-y-3">
-            <div className="h-6 bg-gray-200 rounded w-3/4 mx-auto"></div>
-            <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
-          </div>
-          <div className="grid grid-cols-1 gap-4">
-            <div className="bg-white p-4 rounded-lg shadow-sm">
-              <div className="h-48 bg-gray-200 rounded-lg mb-4"></div>
-              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-              <div className="h-4 bg-gray-200 rounded w-1/2 mt-2"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+
+  if (!product || !product.images || !product.name) {
+    return <Loading />;
   }
 
   return (

@@ -2,8 +2,14 @@
 import { Cart } from "@/types/Cart";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import Loading from "./Loading";
+import { totalPrice } from "@/helpers/totalPrice";
+import { DeleteIcon, Trash2Icon } from "lucide-react";
+
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 function CartDetails({
   cookies,
@@ -20,37 +26,41 @@ function CartDetails({
 }) {
   const [cartItem, setCartItem] = useState<Cart[]>(cart);
   const [cartSubtotal, setSubtotal] = useState(subtotal);
-  const [cartShipping, setShipping] = useState(shipping);
   const [CartTotal, setTotal] = useState(total);
+  const [loading, setLoading] = useState(true);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  const fetchCartData = async (userId: string) => {
-    try {
-      const url = await fetch(`${API_URL}/api/cart?user_id=${userId}`);
-      if (!url.ok) throw new Error('Failed to fetch cart data');
-      
-      const cartData = await url.json();
-      if (!cartData.data) throw new Error('Invalid cart data received');
+  useEffect(() => {
+    const fetchCartData = async (userId: string) => {
+      try {
+        const url = await fetch(`${API_URL}/api/cart?user_id=${userId}`);
 
-      const newCart = cartData.data;
-      const newSubtotal = newCart.reduce(
-        (total: number, item: Cart) =>
-          total + item.product_price * item.product_quantity,
-        0
-      );
-      const newShipping = 0;
-      const newTotal = newSubtotal + newShipping;
+        if (!url.ok) throw new Error("Failed to fetch cart data");
 
-      setCartItem(newCart);
-      setSubtotal(newSubtotal);
-      setShipping(newShipping);
-      setTotal(newTotal);
-    } catch (error) {
-      console.error("Error fetching cart:", error);
-      toast.error("Failed to update cart data");
-    }
-  };
+        const cartData = await url.json();
+        if (!cartData.data) throw new Error("Invalid cart data received");
+
+        const newCart = cartData.data;
+        const newSubtotal = newCart.reduce(
+          (total: number, item: Cart) =>
+            total + item.product_price * item.product_quantity,
+          0
+        );
+        const amount = totalPrice(subtotal);
+
+        setCartItem(newCart);
+        setSubtotal(newSubtotal);
+        setTotal(newSubtotal);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.error("Error fetching cart:", error);
+        toast.error("Failed to update cart data");
+      }
+    };
+
+    fetchCartData(cookies!);
+  }, [API_URL, cartItem, cookies, subtotal]);
 
   const HandleDelete = async (product_id: string) => {
     if (!cookies) {
@@ -67,16 +77,16 @@ function CartDetails({
       );
 
       if (!res.ok) {
-        throw new Error('Failed to delete item');
+        throw new Error("Failed to delete item");
       }
 
       const data = await res.json();
 
       if (data.success) {
-        await fetchCartData(cookies);
+        // await fetchCartData(cookies);
         toast.success("Item deleted successfully!");
       } else {
-        throw new Error(data.message || 'Failed to delete item');
+        throw new Error(data.message || "Failed to delete item");
       }
     } catch (error) {
       console.error("Error deleting item:", error);
@@ -105,13 +115,15 @@ function CartDetails({
       );
     }
   };
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <>
-     <Toaster position="top-center"/>
+      <Toaster position="top-center" />
       {cartItem.length > 0 ? (
         <>
-       
           <div className="w-full flex justify-center items-center">
             <ul className="2xl:w-[1320px] w-full lg:px-12  px-4 py-8 my-8  rounded-lg shadow-md">
               <li className="hidden md:grid grid-cols-5 items-center w-full openSans text-gray-700 font-semibold text-sm border-b pb-4">
@@ -129,13 +141,7 @@ function CartDetails({
                       className="flex flex-col md:flex-row items-center md:justify-between bg-white p-4 rounded-md shadow-sm border border-gray-200"
                     >
                       <div className="flex items-center md:space-x-4 space-x-2 md:col-span-2">
-                        {/* <Image
-                          src={image.asset.url}
-                          alt={item.product_title}
-                          width={120}
-                          height={120}
-                          className="w-[80px] h-[80px] rounded-md object-cover border"
-                        /> */}
+                       
                         {renderImage(item.image_url, item.product_title)}
                         <div>
                           <p className="md:text-[20px] text-sm font-medium text-gray-800 openSans">
@@ -145,7 +151,7 @@ function CartDetails({
                             onClick={() => HandleDelete(item.product_id)}
                             className="md:text-sm text-[10px] text-red-500 inter hover:text-red-600 transition duration-150 ease-in-out mt-2"
                           >
-                            Remove
+                            <Trash2Icon/>
                           </button>
                         </div>
                       </div>
@@ -154,30 +160,8 @@ function CartDetails({
                         ${item.product_price.toFixed(2)}
                       </p>
 
-                      {/* <div className="flex items-center justify-center mt-4 lg:mt-0">
-                        <div>
-                          <div className="flex items-center space-x-2">
-                            <div className="flex items-center border border-gray-500">
-                              <button
-                                onClick={() => handleQuantityChange(-1)}
-                                className="md:px-2 px-1 md:py-2 py-1 border-r border-gray-500 hover:bg-gray-100"
-                              >
-                                -
-                              </button>
-                              <span className="md:px-3 px-2 md:py-2 py-1">
-                                {Quantity}
-                              </span>
-                              <button
-                                onClick={() => handleQuantityChange(1)}
-                                className="md:px-2 px-1 md:py-2 py-1 border-l border-gray-500 hover:bg-gray-100"
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div> */}
-                       <p className="text-gray-600 text-center md:text-[18px] text-sm openSans w-full md:w-[80px] mt-4 lg:mt-0">
+              
+                      <p className="text-gray-600 text-center md:text-[18px] text-sm openSans w-full md:w-[80px] mt-4 lg:mt-0">
                         {item.product_quantity}x
                       </p>
 
@@ -233,7 +217,7 @@ function CartDetails({
                       <div className="flex justify-between inter">
                         <span className="text-gray-600">Shipping Charge</span>
                         <span className="font-bold">
-                          ${cartShipping.toFixed(2)}
+                          ${shipping.toFixed(2)}
                         </span>
                       </div>
                       <hr className="border-t border-gray-300" />

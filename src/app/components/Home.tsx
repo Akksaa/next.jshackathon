@@ -92,7 +92,7 @@ export default async function Home() {
 
                   <li>
                     <Link
-                    rel="preload"
+                      rel="preload"
                       href="./blogs"
                       className="relative transition-colors duration-300"
                     >
@@ -118,22 +118,35 @@ export default async function Home() {
                       <HoverCardContent className="w-[150%] p-3 bg-black opacity-85 border-primYellow">
                         <ul className="text-white inter text-[16px] leading-[24px]">
                           <li className="border-b-[1px] border-zinc-500 py-2">
-                            <Link rel="preload" href={"./signup"}>Sign Up Page</Link>{" "}
+                            <Link rel="preload" href={"./signup"}>
+                              Sign Up Page
+                            </Link>{" "}
                           </li>
                           <li className="flex gap-1 border-b-[1px] border-zinc-500 py-2">
-                            <Link rel="preload" href={"./login"}> Log In Page</Link>{" "}
+                            <Link rel="preload" href={"./login"}>
+                              {" "}
+                              Log In Page
+                            </Link>{" "}
                           </li>
                           <li className="border-b-[1px] border-zinc-500 py-2">
-                            <Link rel="preload" href={"./faq"}>FAQ Page</Link>{" "}
+                            <Link rel="preload" href={"./faq"}>
+                              FAQ Page
+                            </Link>{" "}
                           </li>
                           <li className="border-b-[1px] border-zinc-500 py-2">
-                            <Link rel="preload" href={"./checkout"}>Check Out Page</Link>
+                            <Link rel="preload" href={"./checkout"}>
+                              Check Out Page
+                            </Link>
                           </li>
                           <li className="border-b-[1px] border-zinc-500 py-2">
-                            <Link rel="preload" href={"./chefs"}>Our Chefs</Link>
+                            <Link rel="preload" href={"./chefs"}>
+                              Our Chefs
+                            </Link>
                           </li>
                           <li className="py-2">
-                            <Link rel="preload" href={"./error"}>404 Error Page</Link>{" "}
+                            <Link rel="preload" href={"./error"}>
+                              404 Error Page
+                            </Link>{" "}
                           </li>
                         </ul>
                       </HoverCardContent>
@@ -141,7 +154,7 @@ export default async function Home() {
                   </li>
                   <li>
                     <Link
-                    rel="preload"
+                      rel="preload"
                       href="/about"
                       className="relative transition-colors duration-300"
                     >
@@ -153,7 +166,7 @@ export default async function Home() {
                   </li>
                   <li>
                     <Link
-                    rel="preload"
+                      rel="preload"
                       href="/products"
                       className="relative  transition-colors duration-300"
                     >
@@ -165,7 +178,7 @@ export default async function Home() {
                   </li>
                   <li>
                     <Link
-                    rel="preload"
+                      rel="preload"
                       href="./signup"
                       className="group flex items-center  transition-colors duration-300"
                     >
@@ -179,131 +192,118 @@ export default async function Home() {
                 <div className="flex items-center gap-2 mt-4 sm:mt-0 relative">
                   <ProductSearch products={products} />
                   <div className="flex items-center gap-2">
-                    <HoverCard>
-                      <HoverCardTrigger>
-                        <CiUser
-                          size={24}
-                          className="inline-block hover:text-primYellow transition-colors duration-300 hover:animate-bounce"
-                        />
-                      </HoverCardTrigger>
-                      <HoverCardContent 
-                      rel="preload"
-                      className="w-[150%] p-3 bg-black opacity-85 border-primYellow">
-                        <ul className="text-white inter text-[16px] leading-[24px]">
-                          <li className="border-b-[1px] border-zinc-500 py-2">
-                            <Link href={"./signup"}>Sign Up</Link>{" "}
-                          </li>
-                          <li className="flex gap-1 border-b-[1px] border-zinc-500 py-2">
-                            <Link href={"/"}> My Account</Link>{" "}
-                          </li>
-                          <li className="border-b-[1px] border-zinc-500 py-2">
-                            <Link href={"/"}>My Orders</Link>{" "}
-                          </li>
-                          <li className="py-2">
-                            <Link href={"/"}>Log Out</Link>{" "}
-                          </li>
-                        </ul>
-                      </HoverCardContent>
-                    </HoverCard>
-                    <div className="hidden lg:flex mt-1">
+                    <Link href={"./profile"}>
+                      <CiUser
+                        size={28}
+                        className="inline-block hover:text-primYellow transition-colors duration-300 hover:animate-bounce"
+                      />
+                    </Link>
+
+                    <div className="mt-2.5">
                       <a
                         href="./cart"
                         className="inline-block hover:text-primYellow transition-colors duration-300 hover:animate-bounce"
                       >
-                        <CiBag1 size={24} />
+                        <CiBag1 size={28} />
                       </a>
                     </div>
                   </div>
 
                   <Sheet>
                     <SheetTrigger>
-                      <div rel="preload" className="flex lg:hidden items-center">
-                        <CiMenuBurger size={24} />
+                      <div
+                        rel="preload"
+                        className="flex lg:hidden items-center"
+                      >
+                        <CiMenuBurger size={28} />
                       </div>
                     </SheetTrigger>
-                    <SheetContent rel="preload" className="p-3 bg-black opacity-85 text-white border border-black">
+                    <SheetContent
+                      rel="preload"
+                      className="p-3 bg-black opacity-85 text-white border border-black"
+                    >
                       <SheetHeader>
-                        <SheetTitle className="mt-4">
+                        <SheetTitle className="mt-4 border-b border-opacity-65 border-primYellow pb-4">
                           <Link
                             rel="preload"
                             href={"./"}
-                            className="text-2xl font-bold openSans text-[24px] leading-[32px] flex justify-center"
+                            className="sm:text-2xl font-bold openSans text-[26px] leading-[32px] flex justify-center"
                           >
                             <p className="text-primYellow">Food</p>
                             <p className="text-white">tuck</p>
                           </Link>
-                          <ul className="text-white space-y-3 mt-8 text-[16px] leading-[24px] inter">
-                            <li>
-                              <Link
-                                rel="preload"
-                                href={"./"}
-                                className="hover:text-primYellow"
-                              >
-                                Home
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                rel="preload"
-                                href={"./menu"}
-                                className="hover:text-primYellow"
-                              >
-                                Menu
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                rel="preload"
-                                href={"./blogs"}
-                                className="hover:text-primYellow"
-                              >
-                                Blog
-                              </Link>
-                            </li>
-                            <li>
-                              <p className="hover:text-primYellow cursor-pointer">
-                                Pages
-                              </p>
-                            </li>
-                            <li>
-                              <Link
-                                rel="preload"
-                                href="./about"
-                                className="hover:text-primYellow"
-                              >
-                                About
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                rel="preload"
-                                href="./products"
-                                className="hover:text-primYellow"
-                              >
-                                Shop
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                rel="preload"
-                                href="./signup"
-                                className="hover:text-primYellow"
-                              >
-                                Sign up
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                rel="preload"
-                                href={"./cart"}
-                                className="hover:text-primYellow"
-                              >
-                                Bag
-                              </Link>
-                            </li>
-                          </ul>
                         </SheetTitle>
                       </SheetHeader>
+                      <ul className="text-white sm:space-y-6 space-y-4 mt-8 text-[20px] mx-auto flex flex-col items-center leading-[24px] inter">
+                        <li>
+                          <Link
+                            rel="preload"
+                            href={"./"}
+                            className="hover:text-primYellow"
+                          >
+                            Home
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            rel="preload"
+                            href={"./menu"}
+                            className="hover:text-primYellow"
+                          >
+                            Menu
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            rel="preload"
+                            href={"./blogs"}
+                            className="hover:text-primYellow"
+                          >
+                            Blog
+                          </Link>
+                        </li>
+                        <li>
+                          <p className="hover:text-primYellow cursor-pointer">
+                            Pages
+                          </p>
+                        </li>
+                        <li>
+                          <Link
+                            rel="preload"
+                            href="./about"
+                            className="hover:text-primYellow"
+                          >
+                            About
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            rel="preload"
+                            href="./products"
+                            className="hover:text-primYellow"
+                          >
+                            Shop
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            rel="preload"
+                            href="./signup"
+                            className="hover:text-primYellow"
+                          >
+                            Sign up
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            rel="preload"
+                            href={"./cart"}
+                            className="hover:text-primYellow"
+                          >
+                            Bag
+                          </Link>
+                        </li>
+                      </ul>
                     </SheetContent>
                   </Sheet>
                 </div>
@@ -807,15 +807,7 @@ export default async function Home() {
           </div>
         </main>
       </div>
-      <div className="bg-black flex justify-center sm:h-[560px] w-full bg-[url('/box3.png')] bg-cover h-full">
-        {/* <Image
-          src={"/box3.png"}
-          alt=""
-          width={1920}
-          height={560}
-          className="sm:py-12 py-4"
-        /> */}
-      </div>
+      <div className="bg-black flex justify-center sm:h-[560px] w-full bg-[url('/box3.png')] bg-cover h-full"></div>
       <div className="h-full w-full">
         <main className="bg-black w-full justify-center text-white flex items-center p-3 lg:p-6 xl:p-0">
           <div className="w-full lg:w-[1320px] flex-col p-2 sm:py-12">

@@ -10,9 +10,10 @@ const LogoutButton = ({ userId }: { userId: string }) => {
   const router = useRouter();
 
   const handleLogout = async () => {
+    setLoading(true);
+
     if (!userId) return toast.error("User not found!");
 
-    setLoading(true);
     toast.loading("Deleting account...");
 
     try {
@@ -39,9 +40,11 @@ const LogoutButton = ({ userId }: { userId: string }) => {
     }
   };
 
+ 
+
   return (
     <button
-      className="mt-8 w-full bg-gradient-to-r inter from-primYellow to-orange-400 text-white py-3 px-6 rounded-xl font-semibold flex items-center justify-center space-x-2 hover:opacity-90 transition-opacity"
+      className="mt-6 w-full bg-primYellow openSans text-white py-3 px-6 rounded-md font-semibold flex items-center justify-center space-x-2 hover:opacity-90 transition-opacity"
       onClick={handleLogout}
       disabled={loading}
     >

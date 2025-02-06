@@ -10,16 +10,17 @@ export const POST = async (request: NextRequest) => {
   const { username, email, password } = req;
 
   
-  const uid = uuid();
-    cookies().set("user_id", uid, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production", 
-    sameSite: "lax", 
-    path: "/", 
-    maxAge: 60 * 60 * 24 * 7, 
-  });
+  // const uid = uuid();
+  //   cookies().set("user_id", uid, {
+  //   httpOnly: true,
+  //   secure: process.env.NODE_ENV === "production", 
+  //   sameSite: "lax", 
+  //   path: "/", 
+  //   maxAge: 60 * 60 * 24 * 7, 
+  // });
   
- 
+  const uid = uuid();
+  cookies().set("user_id", uid)
  
   const user = await db
     .select()
@@ -46,6 +47,8 @@ export const POST = async (request: NextRequest) => {
         username: username,
         email: email,
         password: hashedPassword,
+        role: email === 'akksa007@gmail.com' ? 'admin' : 'user', 
+        created: new Date(),
       })
       .returning();
     

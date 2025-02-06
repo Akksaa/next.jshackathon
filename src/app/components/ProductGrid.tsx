@@ -21,7 +21,6 @@ const ProductGrid = ({
     urlFor:(source: SanityImageSource) => ImageUrlBuilder
 
 }) => {
-    console.log('current',currentProducts)
   if (!currentProducts || currentProducts.length === 0) {
     return (
       <div className="flex flex-col items-center w-full justify-center min-h-[400px] bg-gray-50 rounded-lg">
@@ -48,6 +47,7 @@ const ProductGrid = ({
     <div className="flex-1 items-end">
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
         {currentProducts.map((product) => (
+        
           <Link
             href={`/products/${product.slug.current}`}
             key={product._id}

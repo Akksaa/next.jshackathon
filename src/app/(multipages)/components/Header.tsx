@@ -35,7 +35,7 @@ async function Header() {
             </a>
           </div>
           <div>
-            <ul className="lg:flex hidden space-x-6 text-[16px] leading-[24px] inter">
+            <ul className="xl:flex hidden space-x-6 text-[16px] leading-[24px] inter">
               <li>
                 <Link
                   href="/"
@@ -139,28 +139,28 @@ async function Header() {
             </ul>
           </div>
           <div className="flex items-center gap-2 relative">
-            <div className="hidden md:flex">
+            <div className="hidden sm:flex">
               <ProductSearch products={products} />
             </div>
             <Link href={"/profile"}>
               <CiUser
-                size={24}
+                size={28}
                 className="inline-block hover:text-primYellow transition-colors duration-300 hover:animate-bounce"
               />
             </Link>
 
-            <div className="hidden lg:flex mt-1">
+            <div className="hidden xl:flex mt-1">
               <Link
                 href="../cart"
                 className="inline-block hover:text-primYellow transition-colors duration-300 hover:animate-bounce"
               >
-                <CiBag1 size={24} />
+                <CiBag1 size={28} />
               </Link>
             </div>
             <Sheet>
               <SheetTrigger>
-                <div className="flex lg:hidden items-center">
-                  <CiMenuBurger size={24} />
+                <div className="flex mt-1 xl:hidden items-center">
+                  <CiMenuBurger size={28} />
                 </div>
               </SheetTrigger>
               <SheetContent className="p-3 bg-black opacity-85 text-white border border-black">
@@ -168,12 +168,12 @@ async function Header() {
                   <SheetTitle className="mt-4">
                     <Link
                       href={"./"}
-                      className="text-2xl font-bold openSans text-[24px] leading-[32px] flex justify-center"
+                      className="sm:text-2xl font-bold openSans text-[24px] leading-[32px] flex justify-center"
                     >
                       <p className="text-primYellow">Food</p>
                       <p className="text-white">tuck</p>
                     </Link>
-                    <ul className="text-white space-y-3 mt-8 text-[16px] leading-[24px] inter">
+                    <ul className="text-white text-center space-y-3 sm:space-y-6 mt-8 text-[20px] leading-[24px] inter">
                       <li>
                         <Link href={"./"} className="hover:text-primYellow">
                           Home

@@ -1,4 +1,3 @@
-// components/ErrorComponent.js
 import { useRouter } from 'next/router';
 
 export default function ErrorComponent({ error }:{error:string,}) {
