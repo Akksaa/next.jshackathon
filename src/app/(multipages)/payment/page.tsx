@@ -38,7 +38,7 @@ export default function Home() {
         const response = await url.json();
         
         if (!response.orders || !Array.isArray(response.orders)) {
-          throw new Error('Invalid cart data received');
+          console.log('Invalid cart data received');
         }
 
         const subtotal = response.orders.reduce(

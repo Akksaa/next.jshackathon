@@ -167,7 +167,7 @@ export default function ShippingRatesComponent() {
         customsInfo: {
           description: item.product.name,
           quantity: item.quantity,
-          value: item.unitPrice, // USD price
+          value: item.unitPrice || 9, // USD price
           harmonized_tariff_code: "0902.10.10",
           country_of_origin: "PK",
         },

@@ -38,5 +38,14 @@ export interface Order {
     paymentDetails: PaymentDetails;
     _createdAt: string;
     shippingInfo: ShipmentInfo;
-    items: OrderItem[];
+    items: {
+      _key: string;
+      quantity: number;
+      unitPrice: number;
+      product: {
+        _id: string;
+        name: string;
+        price: number;
+      };
+    }[];
   }

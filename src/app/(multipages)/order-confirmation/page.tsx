@@ -21,6 +21,7 @@ const OrderConfirmation = () => {
       const order: Order = orders[0];
       console.log('order:', order)
       setOrder(order);
+      
       setIsLoading(false);
     };
     getOrder();

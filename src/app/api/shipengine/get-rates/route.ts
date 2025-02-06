@@ -1,5 +1,5 @@
 import { shipEngine } from "@/helpers/shipEngine"; // Import ShipEngine client
-import { Address, ShippingPackage } from "@/types/shipmentDetails"
+import { Address, ShipFromAddress, ShippingPackage } from "@/types/shipmentDetails"
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -19,12 +19,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const shipFromAddress: Address = {
+    const shipFromAddress:ShipFromAddress = {
       name: "John Doe",
       phone: "+1 555-678-1234",
       addressLine1: "1600 Pennsylvania Avenue NW",
       cityLocality: "Washington",
       stateProvince:'DC',
+      companyName:"foodTuck",
       postalCode: "20500",
       countryCode: "US",
       addressResidentialIndicator: "no",
@@ -42,8 +43,8 @@ export async function POST(req: NextRequest) {
           customsItems: packages.map((pkg) => ({
             description: pkg.customsInfo?.description || "Unknown Item",
             quantity: pkg.customsInfo?.quantity || 1,
-            value: { amount: pkg.customsInfo?.value || 0, currency: "usd" },
-            harmonized_tariff_code: pkg.customsInfo?.harmonized_tariff_code,
+            value: { amount: pkg.customsInfo?.value || 9, currency: "usd" },
+            harmonized_tariff_code: pkg.customsInfo?.harmonized_tariff_code || "se32445",
             country_of_origin: pkg.customsInfo?.country_of_origin || "PK",
           })),
         },

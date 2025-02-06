@@ -9,6 +9,17 @@ export type Address = {
     countryCode: string;
     addressResidentialIndicator: "yes" | "no";
   };
+export type ShipFromAddress = {
+    name: string;
+    phone: string;
+    addressLine1: string;
+    cityLocality: string;
+    stateProvince:"DC" | "SD";
+    companyName:string,
+    postalCode: string;
+    countryCode: string;
+    addressResidentialIndicator: "yes" | "no";
+  };
   export type unit = "ounce" | "gram" | "kilogram" | "pound";
   export type dimensionUnit = "inch" | "centimeter";
   
