@@ -8,14 +8,7 @@ interface ShipmentInfo {
     countryCode:string;
     postalCode: string;
   }
-  interface Product {
-    _id: string;
-    _ref: string;
-    name: string;
-    description: string;
-    price: number;
-    image: string;
-  }
+
   
   interface PaymentDetails {
     totalAmount: number;
