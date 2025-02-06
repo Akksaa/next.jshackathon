@@ -17,7 +17,7 @@ const LogoutButton = ({ userId }: { userId: string }) => {
     toast.loading("Deleting account...");
 
     try {
-      const res = await fetch("/api/users/logout", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/logout`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId }),

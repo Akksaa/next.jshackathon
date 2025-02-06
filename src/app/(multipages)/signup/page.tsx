@@ -27,7 +27,7 @@ function Page() {
       console.log("Form Data:", formData);
       setLoading(true);
       
-      const res = await axios.post("/api/users/signup", formData, {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/users/signup`, formData, {
         headers: {
           "Content-Type": "application/json",
         },
