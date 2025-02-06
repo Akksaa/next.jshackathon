@@ -41,13 +41,10 @@ export async function GET() {
     .where(eq(cartTable.user_id, userId));
 
     if (!cart.length) {
-      return NextResponse.json(
-        { error: "Cart is empty or user not found" },
-        { status: 404 }
-      );
+      console.log('cart is empty')
     }
 
-  await db.delete(cartTable).where(eq(cartTable.user_id, userId));
+  // await db.delete(cartTable).where(eq(cartTable.user_id, userId));
 
 
     return NextResponse.json({

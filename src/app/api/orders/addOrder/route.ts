@@ -81,6 +81,7 @@ export async function POST() {
   
       const response = await client.create(order)
     console.log("order placed successfully", response);
+    await db.delete(cartTable).where(eq(cartTable.user_id, user_id));
    return  NextResponse.json({message:'Order Placed Successfully'}, { status:200 })
   } catch (error) {
     console.log("error placing order", error);

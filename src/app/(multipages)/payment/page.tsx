@@ -77,7 +77,6 @@ export default function Home() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ /* your order data */ }),
         });
   
         if (!res.ok) throw new Error("Failed to place order");
@@ -91,9 +90,10 @@ export default function Home() {
         setLoading(false);
   
         // Cooldown reset after 5 seconds
-        setTimeout(() => {
+        setTimeout( () => {
           setIsCooldown(false);
           console.log("Cooldown over. You can place an order again.");
+          
         }, 5000);
       }
     };
