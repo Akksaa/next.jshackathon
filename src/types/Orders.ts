@@ -17,13 +17,6 @@ interface ShipmentInfo {
     image: string;
   }
   
-  interface OrderItem {
-    _key: string;
-    quantity: number;
-    unitPrice: number;
-    product: Product;
-  }
-  
   interface PaymentDetails {
     totalAmount: number;
     status: string;
