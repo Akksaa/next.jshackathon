@@ -40,18 +40,21 @@ export async function GET() {
     .from(cartTable)
     .where(eq(cartTable.user_id, userId));
 
-  if (!cart.length) {
-    return { error: "Cart is empty or user not found" };
-  }
+    if (!cart.length) {
+      return NextResponse.json(
+        { error: "Cart is empty or user not found" },
+        { status: 404 }
+      );
+    }
 
-  await db
-    .update(cartTable)
-    .set({ status: "paid" }) // Update status to "paid"
-    .where(eq(cartTable.user_id, userId));
+  await db.delete(cartTable).where(eq(cartTable.user_id, userId));
+
+
     return NextResponse.json({
       orders: cartData.data,
       user_id:userId
     });
+
   } catch (error) {
     console.error('Cookie API error:', error);
     return NextResponse.json(
