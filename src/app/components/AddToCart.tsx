@@ -29,7 +29,7 @@ function AddToCart({ product }: { product: FoodProduct }) {
       })
     });
     if (res .status == 500) {
-      toast.error('Product is already added in the Cart!')
+      toast.error('Please sign up first!')
     } else {
       toast.success('Product Added To Your Bag!')
 
