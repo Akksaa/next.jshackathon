@@ -111,6 +111,7 @@ import Loading from "@/app/components/Loading";
 import ShippingRatesComponent from "@/app/components/ShippingDetails";
 import { orderData } from "@/app/lib/queries";
 import { Package, Truck, MapPin, Home, Clock } from "lucide-react";
+import { Order } from "@/types/Orders";
 
 const OrderConfirmation = () => {
   const [isLoading, setIsLoading] = useState(true);
